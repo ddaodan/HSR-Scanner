@@ -76,7 +76,7 @@
     </property>
     <widget class="QWidget" name="Scan">
      <attribute name="title">
-      <string>Scan</string>
+      <string>扫描</string>
      </attribute>
      <widget class="QGroupBox" name="formGroupBox">
       <property name="geometry">
@@ -88,7 +88,7 @@
        </rect>
       </property>
       <property name="title">
-       <string>Items to scan</string>
+       <string>扫描项目</string>
       </property>
       <layout class="QFormLayout" name="formLayout">
        <item row="1" column="1">
@@ -96,14 +96,14 @@
          <item>
           <widget class="QCheckBox" name="checkBoxScanLightCones">
            <property name="text">
-            <string>Light Cones</string>
+            <string>光锥</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QCheckBox" name="checkBoxScanRelics">
            <property name="text">
-            <string>Relics</string>
+            <string>遗器</string>
            </property>
           </widget>
          </item>
@@ -113,7 +113,7 @@
             <bool>true</bool>
            </property>
            <property name="text">
-            <string>Characters</string>
+            <string>角色</string>
            </property>
           </widget>
          </item>
@@ -134,7 +134,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Start Scan</string>
+       <string>开始扫描</string>
       </property>
      </widget>
      <widget class="QGroupBox" name="groupBox">
@@ -147,7 +147,7 @@
        </rect>
       </property>
       <property name="title">
-       <string>Item count</string>
+       <string>项目数量</string>
       </property>
       <widget class="QWidget" name="formLayoutWidget">
        <property name="geometry">
@@ -162,21 +162,21 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label_23">
           <property name="text">
-           <string>Light Cones:</string>
+           <string>光锥：</string>
           </property>
          </widget>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_24">
           <property name="text">
-           <string>Relics:</string>
+           <string>遗器：</string>
           </property>
          </widget>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="label_25">
           <property name="text">
-           <string>Characters:</string>
+           <string>角色：</string>
           </property>
          </widget>
         </item>
@@ -292,7 +292,7 @@
        </rect>
       </property>
       <property name="title">
-       <string>Scan options</string>
+       <string>扫描设置</string>
       </property>
       <widget class="QWidget" name="formLayoutWidget_2">
        <property name="geometry">
@@ -310,7 +310,7 @@
            <bool>true</bool>
           </property>
           <property name="text">
-           <string>Light Cone options</string>
+           <string>光锥设置</string>
           </property>
          </widget>
         </item>
@@ -320,7 +320,7 @@
            <bool>true</bool>
           </property>
           <property name="text">
-           <string>Min Rarity:</string>
+           <string>Min 稀有度：</string>
           </property>
          </widget>
         </item>
@@ -349,7 +349,7 @@
            <bool>true</bool>
           </property>
           <property name="text">
-           <string>Min Level:</string>
+           <string>Min 等级：</string>
           </property>
          </widget>
         </item>
@@ -384,14 +384,14 @@
         <item row="0" column="0" colspan="2">
          <widget class="QLabel" name="label_8">
           <property name="text">
-           <string>Relic options</string>
+           <string>遗器设置</string>
           </property>
          </widget>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="label_6">
           <property name="text">
-           <string>Min Rarity:</string>
+           <string>Min 稀有度：</string>
           </property>
          </widget>
         </item>
@@ -414,7 +414,7 @@
         <item row="1" column="0">
          <widget class="QLabel" name="label_7">
           <property name="text">
-           <string>Min Level:</string>
+           <string>Min 等级：</string>
           </property>
          </widget>
         </item>
@@ -449,14 +449,14 @@
         <item row="0" column="0" colspan="2">
          <widget class="QLabel" name="label_21">
           <property name="text">
-           <string>Character options</string>
+           <string>角色设置</string>
           </property>
          </widget>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_20">
           <property name="text">
-           <string>Min Level:</string>
+           <string>Min 等级:</string>
           </property>
          </widget>
         </item>
@@ -489,7 +489,7 @@
        </rect>
       </property>
       <property name="title">
-       <string>Output location</string>
+       <string>导出位置</string>
       </property>
       <widget class="QWidget" name="gridLayoutWidget">
        <property name="geometry">
@@ -504,14 +504,14 @@
         <item row="1" column="1">
          <widget class="QPushButton" name="pushButtonOpenLocation">
           <property name="text">
-           <string>Open Folder</string>
+           <string>打开文件夹</string>
           </property>
          </widget>
         </item>
         <item row="1" column="0">
          <widget class="QPushButton" name="pushButtonChangeLocation">
           <property name="text">
-           <string>Change</string>
+           <string>修改</string>
           </property>
          </widget>
         </item>
@@ -621,7 +621,7 @@ p, li { white-space: pre-wrap; }
        </font>
       </property>
       <property name="text">
-       <string>Press ENTER to cancel</string>
+       <string>按ENTER键取消</string>
       </property>
      </widget>
      <widget class="QGroupBox" name="groupBox_5">
@@ -634,7 +634,7 @@ p, li { white-space: pre-wrap; }
        </rect>
       </property>
       <property name="title">
-       <string>Log</string>
+       <string>日志</string>
       </property>
       <widget class="QPlainTextEdit" name="textEditLog">
        <property name="geometry">
@@ -656,7 +656,7 @@ p, li { white-space: pre-wrap; }
       <bool>true</bool>
      </property>
      <attribute name="title">
-      <string>Advanced</string>
+      <string>高级</string>
      </attribute>
      <widget class="QGroupBox" name="formGroupBox_2">
       <property name="geometry">
