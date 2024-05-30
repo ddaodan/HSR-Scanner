@@ -55,7 +55,7 @@ class HSRScannerUI(QtWidgets.QMainWindow, Ui_MainWindow):
         :param game_data: The game data
         """
         self.game_data = game_data
-        self.log("Loaded database version: " + self.game_data.version)
+        self.log("加载的数据库版本：" + self.game_data.version)
 
         try:
             self.pushButtonStartScan.clicked.disconnect()
@@ -65,13 +65,13 @@ class HSRScannerUI(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.pushButtonStartScan.clicked.connect(self.start_scan)
         self.pushButtonStartScan.setEnabled(True)
-        self.pushButtonStartScan.setText("Start Scan")
+        self.pushButtonStartScan.setText("开始扫描")
 
         self.pushButtonStartScanRecentRelics.clicked.connect(
             self.start_scan_recent_relics
         )
         self.pushButtonStartScanRecentRelics.setEnabled(True)
-        self.pushButtonStartScanRecentRelics.setText("Scan")
+        self.pushButtonStartScanRecentRelics.setText("扫描")
 
         self._fetch_game_data_thread.deleteLater()
 
@@ -82,7 +82,7 @@ class HSRScannerUI(QtWidgets.QMainWindow, Ui_MainWindow):
         """
         self.log(
             (
-                f"Failed to load game data: {e} (Firewall or antivirus may be blocking the connection.)",
+                f"游戏数据加载失败：{e} （防火墙或防病毒软件可能会阻止连接。）",
                 LogLevel.ERROR,
             )
         )
@@ -135,7 +135,7 @@ class HSRScannerUI(QtWidgets.QMainWindow, Ui_MainWindow):
             try:
                 QtGui.QDesktopServices.openUrl(QUrl.fromLocalFile(output_location))
             except Exception as e:
-                self.log((f"Failed to open output location: {e}", LogLevel.ERROR))
+                self.log((f"无法打开导出位置：{e}", LogLevel.ERROR))
 
     def load_settings(self) -> None:
         """Loads the settings for the scan"""
@@ -273,13 +273,13 @@ class HSRScannerUI(QtWidgets.QMainWindow, Ui_MainWindow):
                     config["scan_characters"],
                 ]
             ):
-                raise Exception("No scan options selected. Please select at least one.")
+                raise Exception("未选择扫描选项。请至少选择一项。")
             scanner = HSRScanner(config, self.game_data)
         except Exception as e:
             self.log((e, LogLevel.ERROR))
             return
 
-        self.log("Starting scan...")
+        self.log("开始扫描...")
 
         self.to_scanner_thread(
             scanner, config["debug_output_location"] if config["debug"] else None
@@ -416,7 +416,7 @@ class HSRScannerUI(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.lineEditOutputLocation.text()
             )
             self.log(
-                "Debug mode enabled. Debug output will be saved to "
+                "调试模式已启用。调试输出将保存到"
                 + config["debug_output_location"]
             )
 
@@ -443,10 +443,10 @@ class HSRScannerUI(QtWidgets.QMainWindow, Ui_MainWindow):
                 )
             except Exception as e:
                 self.log(("Failed to convert to SRO format: " + str(e), LogLevel.ERROR))
-        self.log("Scan complete. Data saved to " + output_location)
+        self.log("扫描完成。数据已保存至" + output_location)
 
         if debug_output_location:
-            self.log(f"Saving log to {debug_output_location}.")
+            self.log(f"将日志保存到{debug_output_location}。")
             save_to_txt(
                 self.textEditLog.toPlainText(), debug_output_location, "log.txt"
             )
@@ -460,7 +460,7 @@ class HSRScannerUI(QtWidgets.QMainWindow, Ui_MainWindow):
         """
         self.log((msg, LogLevel.FATAL))
         if debug_output_location:
-            self.log(f"Saving log to {debug_output_location}.")
+            self.log(f"将日志保存到{debug_output_location}。")
             save_to_txt(
                 self.textEditLog.toPlainText(), debug_output_location, "log.txt"
             )
@@ -517,7 +517,7 @@ class HSRScannerUI(QtWidgets.QMainWindow, Ui_MainWindow):
         """Enables the start scan button and sets the text to Start Scan"""
         self._is_running = False
 
-        self.pushButtonStartScan.setText("Start Scan")
+        self.pushButtonStartScan.setText("开始扫描")
         self.pushButtonStartScan.setEnabled(True)
 
         self.pushButtonStartScanRecentRelics.setText("Scan")
@@ -613,11 +613,11 @@ class ScannerThread(QThread):
         try:
             res = asyncio.run(self._scanner.start_scan())
             if self._interrupt_requested:
-                self.error_signal.emit("Scan cancelled by user.")
+                self.error_signal.emit("扫描被用户取消。")
             else:
                 self.result_signal.emit(res)
         except InterruptedScanException:
-            self.error_signal.emit("Scan cancelled by user.")
+            self.error_signal.emit("扫描被用户取消。")
         except Exception as e:
             self.error_signal.emit(
                 f'Scan aborted with error {e.__class__.__name__}: {e}\nStack trace: "{traceback.format_exc()}" (Try increasing nav/scan delay in the scanner settings, or scan with a different in-game background, window resolution, or fullscreen/windowed mode.)'

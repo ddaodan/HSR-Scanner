@@ -4,9 +4,9 @@ from enum import Enum
 class LogLevel(Enum):
     """LogLevel enum for logging the events"""
 
-    INFO = "INFO"
-    ERROR = "ERROR"
-    WARNING = "WARN"
-    DEBUG = "DEBUG"
+    INFO = "信息"
+    ERROR = "错误"
+    WARNING = "警告"
+    DEBUG = "调试"
     TRACE = "TRACE"
-    FATAL = "FATAL"
+    FATAL = "致命"

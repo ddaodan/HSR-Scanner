@@ -63,7 +63,7 @@ class HSRScanner(QObject):
                 break
         if not self._hwnd:
             raise Exception(
-                "Honkai: Star Rail not found. Please open the game and try again."
+                "未找到崩坏：星穹铁道。请打开游戏并重试。"
             )
         self._config = config
         self._game_data = game_data
@@ -74,7 +74,7 @@ class HSRScanner(QObject):
         self._aspect_ratio = self._nav.get_aspect_ratio()
         if self._aspect_ratio not in SUPPORTED_ASPECT_RATIOS:
             raise Exception(
-                f"Aspect ratio {self._aspect_ratio} not supported. Supported aspect ratios: {SUPPORTED_ASPECT_RATIOS}"
+                f"纵横比{self._aspect_ratio}不支持。支持的宽高比：{SUPPORTED_ASPECT_RATIOS}"
             )
 
         self._screenshot = Screenshot(
@@ -98,7 +98,7 @@ class HSRScanner(QObject):
 
         if not self._is_en:
             self._log(
-                "Non-English game name detected. The scanner only works with English text.",
+                "检测到非英文游戏名称。扫描仅适用于英文文本。",
                 LogLevel.WARNING,
             )
         bring_window_to_foreground(self._hwnd)
@@ -115,14 +115,14 @@ class HSRScanner(QObject):
                     uid_img, "0123456789", 7, True, preprocess_uid_img
                 )[:9]
             if len(uid) != 9:
-                self._log(f"Failed to parse UID. Got '{uid}' instead.", LogLevel.ERROR)
+                self._log(f"无法解析UID。 Got '{uid}' instead.", LogLevel.ERROR)
                 uid = None
             else:
                 self._log(f"UID: {uid}.")
 
         light_cones = []
         if self._config["scan_light_cones"] and not self._interrupt_event.is_set():
-            self._log("Scanning light cones...")
+            self._log("扫描光锥...")
             light_cones = self.scan_inventory(
                 LightConeStrategy(
                     self._game_data,
@@ -133,14 +133,14 @@ class HSRScanner(QObject):
                 )
             )
             (
-                self._log("Finished scanning light cones.")
+                self._log("扫描光锥完成。")
                 if not self._interrupt_event.is_set()
                 else None
             )
 
         relics = []
         if self._config["scan_relics"] and not self._interrupt_event.is_set():
-            self._log("Scanning relics...")
+            self._log("扫描遗器...")
             relics = self.scan_inventory(
                 RelicStrategy(
                     self._game_data,
@@ -151,17 +151,17 @@ class HSRScanner(QObject):
                 )
             )
             (
-                self._log("Finished scanning relics.")
+                self._log("遗器扫描完成。")
                 if not self._interrupt_event.is_set()
                 else None
             )
 
         characters = []
         if self._config["scan_characters"] and not self._interrupt_event.is_set():
-            self._log("Scanning characters...")
+            self._log("扫描角色...")
             characters = self.scan_characters()
             (
-                self._log("Finished scanning characters.")
+                self._log("角色扫描完成。")
                 if not self._interrupt_event.is_set()
                 else None
             )
@@ -171,7 +171,7 @@ class HSRScanner(QObject):
             return
 
         self.complete_signal.emit()
-        self._log("Starting OCR process. Please wait...")
+        self._log("启动OCR进程。请稍等...")
 
         return {
             "source": "HSR-Scanner",
@@ -232,19 +232,19 @@ class HSRScanner(QObject):
             quantity = image_to_string(quantity, "0123456789/", 7)
 
             try:
-                self._log(f"Quantity: {quantity}.")
+                self._log(f"数量：{quantity}.")
                 quantity = quantity_remaining = int(quantity.split("/")[0])
                 break
             except ValueError:
                 retry += 1
                 if retry > max_retry:
                     raise ValueError(
-                        "Failed to parse quantity from inventory screen."
+                        "无法从背包屏幕解析数量。"
                         + (f' Got "{quantity}" instead.' if quantity else "")
                     )
                 else:
                     self._log(
-                        f"Failed to parse quantity. Retrying... ({retry}/{max_retry})",
+                        f"无法解析数量。重试... ({retry}/{max_retry})",
                         LogLevel.WARNING,
                     )
                 self._nav_sleep(1)
@@ -422,7 +422,7 @@ class HSRScanner(QObject):
                 character_total, "0123456789/", 7, True, preprocess_char_count_img
             )
             try:
-                self._log(f"Character total: {character_total}.")
+                self._log(f"角色数量：{character_total}.")
                 character_total = character_total.split("/")[0]
                 character_count = character_total = int(character_total)
                 break
